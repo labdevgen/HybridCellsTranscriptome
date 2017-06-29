@@ -23,12 +23,13 @@ for i in files.keys():
 	f=open("tophut.q","w")
 	f.write("""#!/bin/bash
 #PBS -V -r n 
-#PBS -l select=1:ncpus=4:mem=100gb,cput=64:10:00,walltime=32:15:00
-#PBS -q vkop2q
+#PBS -l select=1:ncpus=12:mem=24gb,cput=164:10:00,walltime=32:15:00
+#PBS -q bl2x220g7q
 #PBS -N thut"""+files[i]+"""
 #PBS -j oe
 date"""+
-"\nexport PATH=$HOME/Distr/bowtie2-2.2.1:$PATH\n" #change bowtie2 version to old 2.2.1
+"\nexport PATH=$HOME/Distr/bowtie2-2.2.1:$PATH\n"+ #change bowtie2 version to old 2.2.1
+"export PATH=$HOME/Distr/samtools-0.1.19/:$PATH\n" #change samtools version to old 0.1.19
 )
 	
 	f.write("cd "+work_dir+"\n")
@@ -38,10 +39,10 @@ date"""+
 		# f.write("gzip "+i+".fastq "+"\n") #and gztip initial fastq
 	
 	
-	f.write("tophat --prefilter-multihits -p 12 -o "+work_dir+"tophat_out/"+files[i]+" --transcriptome-index "+transcr_index+" "+genome_index+" "+i+"\n") #run tophat with trimmed or trimmed.gz file
+	f.write("tophat --prefilter-multihits -p 11 -o "+work_dir+"tophat_out/"+files[i]+" --transcriptome-index "+transcr_index+" "+genome_index+" "+i+"\n") #run tophat with trimmed or trimmed.gz file
 	
 #	f.write("python2.7 infect_align_pareser.py "+work_dir+"tophat_out/"+files[i]+"_trimmed/unmapped.bam\n")
 	f.write("cp "+work_dir+"tophat_out/"+files[i]+"/align_summary.txt "+work_dir+files[i]+"_align_summary.txt\n")
 #	f.write("cp "+work_dir+"tophat_out/"+files[i]+"/unmapped.bam.fasta.infect_bwtout.log "+work_dir+files[i]+"_unmapped.bam.fasta.infect_bwtout.log")
 	f.close()
-#	executeBashCommand("qsub tophut.q")
+	executeBashCommand("qsub tophut.q")
