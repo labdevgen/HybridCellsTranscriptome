@@ -3,6 +3,7 @@ import numpy.ma as ma
 import math
 import matplotlib.pyplot as plt
 
+
 ################################functions###############################
 def del_intersection_from_list(l1,l2):
   return np.delete(l1,np.nonzero(np.in1d(l1,l2)))
@@ -53,10 +54,11 @@ FPKM_threshold_N=10
 
 fibs=["tmf2","tmf5"]
 esc=["tme14","tme17"]
-tauGFP="tauGFP"
-m5s="m5S"
+tauGFP="tau-GFP4N"
+m5s="m5S4N"
 
-fpkm_file_filds_N = {"m5S":1,"tmf2":2,"tmf5":3,"tme14":4,"tauGFP":5,"tme17":6} #numbers of cols (0-basez) in fpkm_tracking file for each cell line, where it's fpkm is writen.
+#fpkm_file_filds_N = {"m5S":1,""tmf2":2,"tmf5":3,"tme14":4,"tauGFP":5,"tme17":6,m5S-4N":7,"tau-GFP4N":8} #numbers of cols (0-basez) in fpkm_tracking file for each cell line, where it's fpkm is writen.
+fpkm_file_filds_N = {"tmf2":2,"tmf5":3,"tme14":4,"tme17":6,"m5S4N":7,"tau-GFP4N":8} #numbers of cols (0-basez) in fpkm_tracking file for each cell line, where it's fpkm is writen.
 for i in fpkm_file_filds_N.keys(): #numbers of cols (0-basez) in fpkm_tracking file for each cell line, where it's fpkm is writen.
     fpkm_file_filds_N[i] = (fpkm_file_filds_N[i]-1)*4+9
     
@@ -64,7 +66,8 @@ for i in fpkm_file_filds_N.keys(): #numbers of cols (0-basez) in fpkm_tracking f
 dt = [('test_id', 'S18'), ('gene_id', 'S55'), ('gene', 'S55'), ('locus', 'S34'), ('sample_1', 'S10'), ('sample_2', 'S10'), ('status', 'S6'), ('value_1', '<f8'), ('value_2', '<f8'), ('log2fold_change', '<f8'), ('test_stat', '<f8'), ('p_value', '<f8'), ('q_value', '<f8'), ('significant', 'S3')]
 exp = np.transpose(np.loadtxt("gene_exp.diff", dtype=dt,skiprows=1,unpack=True))
 
-dt = [('f0', 'S18'), ('f1', 'S1'), ('f2', 'S1'), ('f3', 'S18'), ('f4', 'S18'), ('f5', 'S100'), ('f6', 'S34'), ('f7', 'S1'), ('f8', 'S1'), ('f9', '<f8'), ('f10', '<f8'), ('f11', '<f8'), ('f12', 'S2'), ('f13', '<f8'), ('f14', '<f8'), ('f15', '<f8'), ('f16', 'S6'), ('f17', '<f8'), ('f18', '<f8'), ('f19', '<f8'), ('f20', 'S6'), ('f21', '<f8'), ('f22', '<f8'), ('f23', '<f8'), ('f24', 'S2'), ('f25', '<f8'), ('f26', '<f8'), ('f27', '<f8'), ('f28', 'S2'), ('f29', '<f8'), ('f30', '<f8'), ('f31', '<f8'), ('f32', 'S2')]
+#dt = [('f0', 'S18'), ('f1', 'S1'), ('f2', 'S1'), ('f3', 'S18'), ('f4', 'S18'), ('f5', 'S100'), ('f6', 'S34'), ('f7', 'S1'), ('f8', 'S1'), ('f9', '<f8'), ('f10', '<f8'), ('f11', '<f8'), ('f12', 'S2'), ('f13', '<f8'), ('f14', '<f8'), ('f15', '<f8'), ('f16', 'S6'), ('f17', '<f8'), ('f18', '<f8'), ('f19', '<f8'), ('f20', 'S6'), ('f21', '<f8'), ('f22', '<f8'), ('f23', '<f8'), ('f24', 'S2'), ('f25', '<f8'), ('f26', '<f8'), ('f27', '<f8'), ('f28', 'S2'), ('f29', '<f8'), ('f30', '<f8'), ('f31', '<f8'), ('f32', 'S2')]
+dt = [('f0', 'S18'), ('f1', 'S1'), ('f2', 'S1'), ('f3', 'S18'), ('f4', 'S18'), ('f5', 'S104'), ('f6', 'S34'), ('f7', 'S1'), ('f8', 'S1'), ('f9', '<f8'), ('f10', '<f8'), ('f11', '<f8'), ('f12', 'S2'), ('f13', '<f8'), ('f14', '<f8'), ('f15', '<f8'), ('f16', 'S6'), ('f17', '<f8'), ('f18', '<f8'), ('f19', '<f8'), ('f20', 'S6'), ('f21', '<f8'), ('f22', '<f8'), ('f23', '<f8'), ('f24', 'S2'), ('f25', '<f8'), ('f26', '<f8'), ('f27', '<f8'), ('f28', 'S2'), ('f29', '<f8'), ('f30', '<f8'), ('f31', '<f8'), ('f32', 'S2'), ('f33', '<f8'), ('f34', '<f8'), ('f35', '<f8'), ('f36', 'S6'), ('f37', '<f8'), ('f38', '<f8'), ('f39', '<f8'), ('f40', 'S6')]
 fpkms = np.transpose(np.loadtxt("genes.fpkm_tracking", dtype=dt,skiprows=1,unpack=True))
 
 global genes_dict #in this dictionary stored arrays of genes sorted by gene category and clone name
