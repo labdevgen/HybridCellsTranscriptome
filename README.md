@@ -1,5 +1,5 @@
 # HybridCellsTranscriptome
-Welcome to the HybridCellsTranscriptome wiki! 
+Welcome to the HybridCellsTranscriptome wiki!<br>
 The Project is a supplement to the Matveeva, Fishman et al., 2017 paper (Nature Scientific Reports). 
 It contains 3 scripts. 
 clink.py and tophat.py were used to simplify execution of Tophat and Cufflinks on cluster nodes. 
